@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="product">
+	
+	<!-- 상품 목록 -->
+	<select id="getProductList" parameterType="Map" resultType="com.bookshop.domain.Product">
+		select * from product order by #{sortMethod} desc
+	</select>
+	
+	<!-- 상품 대분류별 상품 목록 -->
+	<select id="getBigCategoryList" parameterType="Map" resultType="com.bookshop.domain.Product">
+		select * from product where category1=#{category1} order by #{sortMethod} desc
+	</select>
+	
+	<!-- 상품 소분류별 상품 목록 -->
+	<select id="getSmallCategoryList" parameterType="Map" resultType="com.bookshop.domain.Product">
+		select * from product where category2=#{category2} order by #{sortMethod} desc
+	</select>
+	
+	<!-- 총 상품 수 -->
+	<select id="allProductCount" resultType="int">
+		select count(*) from product
+	</select>
+	
+	<!-- 상품 대분류별 총 상품 수 -->
+	<select id="BigCount" resultType="int">
+		select count(*) from product where category1=#{category1}
+	</select>
+	
+	<!-- 상품 소분류별 총 상품 수 -->
+	<select id="SmallCount" resultType="int">
+		select count(*) from product where category2=#{category2}
+	</select>
+	
+	<!-- 상품 상세보기 -->
+	<select id="getProduct" resultType="com.bookshop.dto.Product">
+		select * from product where pid=#{pid}
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="insProduct">
+		insert into product(category1, category2, pname, subtitle, price, author, content, 
+		company, stock, img1, img2, img3, img4, pstar)
+		values(category1=#{category1}, category2=#{category2},
+		pname=#{pname}, subtitle=#{subtitle}, price=#{price}, author=#{author},
+		content=#{content}, default, img1=#{img1}, img2=#{img2}, img3=#{img3},
+		img4=#{img4}, default)
+	</insert>
+	
+	<!-- 상품 변경 -->
+	<update id="upProduct">
+		update product set category1=#{category1}, category2=#{category2}, pname=#{pname},
+		author=#{author}, content=#{content}, company=#{company},
+		img1=#{img1}, img2=#{img2}, img3=#{img3}, img4=#{img4} where pid=#{pid}
+	</update>
+	
+	<!-- 별점 업데이트 -->
+	<update id="upStar" parameterType="map">
+		update product set pstar=#{pstar}, rcnt=rcnt+#{rcnt} where pid=#{pid}
+	</update>
+	
+	<!-- 재고 업데이트 -->
+	<update id="upStock" parameterType="map">
+		update product set stock=#{stock}, where pid=#{pid}
+	</update>
+	
+	<!-- 상품 삭제 -->
+	<delete id="delProduct">
+		delete from product where pid=#{pid}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
