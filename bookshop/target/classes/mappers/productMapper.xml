@@ -35,7 +35,7 @@
 	</select>
 	
 	<!-- 상품 상세보기 -->
-	<select id="getProduct" resultType="com.bookshop.dto.Product">
+	<select id="getProduct" resultType="com.bookshop.domain.Product">
 		select * from product where pid=#{pid}
 	</select>
 	
