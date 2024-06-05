@@ -2,29 +2,33 @@
 
 - 팀장의 리포지토리에서 클론으로 자신의 로컬 디렉토리에 파일을 가져온다.
 
-- 2가지 방법이 있는데  
-
 - 모든 브랜치를 다 가져오고 싶을때
 
-- $ git clone -b \<branchname\> \<remote-repo-url\>
+- $ git clone \<remote-repo-url\>
 
-- 그냥 이거 쓰자
+- 그리고 꼭 클론해온 디렉토리에 들어가서 뒤에 나올 명령어를 사용하자. 
 
-- 리포지토리에 있는 모든 브랜치들을 패치한 후에 특정한 브랜치로 전환한다. 
+- $ git branch -r 을 입력하면 가져온 프로젝트의 모든 브랜치를 볼수 있다.
 
-- 그러면 그 브랜치를 기준으로 로컬에서 git push 와 git pull를 할 수 있도록 설정이 된다. 
+- $ git checkout -b \<branch\> 브랜치로 이동하는 명령어이다
 
-- 하지만 이렇게 하면 각 브랜치가 갖고 있는 모든 파일들을 다 패치한 상태이다.
+- 이제 작업하면된다.
 
-- 예를들어
+- 만약 내작업이 끝나지 않았어도 develop브랜치에 변경사항이 있으면 하던 작업을 임시저장하고
 
-- $ git clone -b feature-buttom https://github.com/jst1024/bookshop.git
+- $ git stash 임시저장 명령어
 
-- 이렇게 하게 되면 자동으로 feature-buttom 브랜치가 로컬 브랜치로 설정되는 동시에 다른 브랜치들도 추적할수 있다.
+- $ git checkout develop 으로 이동한 뒤
 
-- 특정 브랜치 하나만 가져오고 싶을때
+- $ git pull origin develop 으로 변경사항을 받아오고
 
-- $ git clone -b \<branchname\> --single-branch \<remote-repo-url\>
+- $ git checkout \<branch\> 로 이동해서
+
+- $ git merge develop 으로 병합하고
+
+- $ git stash pop 을 사용해서 임시저장한 작업을 가져온다. (stash pop은 apply + drop 이다 stash는 목록으로 되어있어서 pop을 쓰는게 더 좋은듯) 
+
+
 
   
 
@@ -44,7 +48,7 @@
 
 - 하나의 기능은 하나의 커밋으로 합니다.
 
-- 자신의 PullRequest는 스스로 merge 합니다.
+- 자신의 PullRequest는 스스로 merge 합니다. conflict가 발생할시 두명이상이 같이보자
 
 - develop 브랜치에 변경사항이 생길경우 pull 합니다.
 
@@ -73,9 +77,9 @@
 
 # 개발시 유의해야 할점
 
-- 공통적으로 사용될 common.css 파일을 변경하지 않는다.
+- 공통적으로 사용될 style.css 파일을 변경하지 않는다.
 
-- 각 페이지에 추가로 들어가야할 css는 css파일을 만들어서 사용
+- 각 페이지에 추가로 들어가야할 css는 css파일을 만들어서 사용하거나 각 jsp파일에 style태그를 사용한다.
 
 - 개발할때 같은 페이지를 여러명이서 작업하지 않도록 조심한다.
 
@@ -102,7 +106,7 @@
 
 - $ git checkout develop : develop 브랜치로 변경
 
-- $ git checkout -b \<feature branch 명\> :명령어를 통해 브랜치 생성 후 checkout한다
+- $ git checkout -b \<feature branch 명\> 명령어를 통해  브랜치가 없다면 브랜치 생성 후 브랜치로 이동한다.
 
 - $ git remote update : 원격 저장소의 모든 브랜치에 대한 최신 이력 정보를 확인하는 명령어입니다.
 
