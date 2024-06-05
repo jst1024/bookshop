@@ -51,7 +51,7 @@ public class ProductController {
 		int bigCount = productService.bigCount(category1);
 		model.addAttribute("bigCategoryList", bigCategoryList);
 		model.addAttribute("bigCount", bigCount);
-		return "product/" + category1 + "List";
+		return "product/productList";
 	}
 	
 	@GetMapping("smallCategoryList.do")
@@ -60,7 +60,7 @@ public class ProductController {
 		int smallCount = productService.smallCount(category2);
 		model.addAttribute("smallCategoryList", smallCategoryList);
 		model.addAttribute("smallCount", smallCount);
-		return "product/" + category2 + "List";
+		return "product/productList";
 	}
 	
 	@GetMapping("getProduct.do")
