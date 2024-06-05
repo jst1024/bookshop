@@ -1,10 +1,18 @@
 # 팀프로젝트 시작시
 
-- 팀장의 리포지토리에서 클론으로 자신의 로컬 디렉토리에 파일을 가져온다.
+- Projects / bookshop에 Todo에서 Add item 클릭후 해야할일을 적고 엔터를 눌러서 이슈를 생성하고
+
+- 생성된 이슈에 마우스를 올리면 점 세개가 뜨는데 클릭 후 Convert to issue 클릭해서 bookshop을 선택한다
+
+- 다시 이슈에 마우스를 올려서 점 세개를 누르고 Open in new tab 클릭 우측 Development 탭에 Create a branch 클릭 
+
+- Branch 이름은 Feature-\<기능\>과 같이 설정 후 Change branch source 클릭 해서
+
+- 해당 브랜치 소스를 develop으로 변경하여 생성
 
 - 모든 브랜치를 다 가져오고 싶을때
 
-- $ git clone \<remote-repo-url\>
+- $ git clone url복사해서넣고
 
 - 그리고 꼭 클론해온 디렉토리에 들어가서 뒤에 나올 명령어를 사용하자. 
 
@@ -12,7 +20,7 @@
 
 - $ git checkout -b \<branch\> 브랜치로 이동하는 명령어이다
 
-- 이제 작업하면된다.
+- 항상 작업은 feature-브랜치에서 push까지 해야한다.
 
 - 만약 내작업이 끝나지 않았어도 develop브랜치에 변경사항이 있으면 하던 작업을 임시저장하고
 
@@ -24,9 +32,11 @@
 
 - $ git checkout \<branch\> 로 이동해서
 
-- $ git merge develop 으로 병합하고
+- $ git merge develop 으로 내가 작업하고있는 브랜치에 devolop브랜치를 병합시키고
 
-- $ git stash pop 을 사용해서 임시저장한 작업을 가져온다. (stash pop은 apply + drop 이다 stash는 목록으로 되어있어서 pop을 쓰는게 더 좋은듯) 
+- $ git stash pop 을 사용해서 임시저장한 작업을 가져온다.
+
+
 
 
 
@@ -48,7 +58,7 @@
 
 - 하나의 기능은 하나의 커밋으로 합니다.
 
-- 자신의 PullRequest는 스스로 merge 합니다. conflict가 발생할시 두명이상이 같이보자
+- 자신의 PullRequest는 스스로 merge 합니다.
 
 - develop 브랜치에 변경사항이 생길경우 pull 합니다.
 
