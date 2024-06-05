@@ -3,7 +3,42 @@
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
+	
+	<!-- 회원 목록 가져오기 -->
 	<select id="getMemberList" resultType="com.bookshop.domain.Member">
-		select * from member
+		select * from member order by resdate desc
 	</select>
+	
+	<!-- 회원 정보 가져오기  -->
+	<select id="getMember" resultType="com.bookshop.domain.Member">
+		select * from member where id=#{id}
+	</select>
+	
+	<!-- 회원 총 회원 수  -->
+	<select id="memberCount" resultType="int">
+		select count(*) from member
+	</select>
+	
+	<!-- 회원 추가 -->
+	<insert id="insMember">
+		insert into member values (#{id}, #{pw}, #{name}, #{age}, #{gender}, #{tel}, #{email}, #{addr1},
+		#{addr2}, #{postcode}, default, default, default)
+	</insert>
+	
+	<!--  회원 정보 수정 -->
+	<update id="ChagneInfo">
+		update member set pw=#{pw}, name=#{name}, age=#{age}, gender=#{gender}, tel=#{tel}, email=#{email},
+		addr1=#{addr1},addr2=#{addr2},postcode=#{postcode} where id=#{id}
+	</update>
+	
+	<!-- 포인트 변경 -->
+	<update id="ChangePoint">
+		update Member set point=point+#{point} where id=#{id}
+	</update>
+	
+	<!-- 회원 삭제 -->
+	<delete id="delMember">
+		delete from member where id=#{id}
+	</delete>
+
 </mapper>

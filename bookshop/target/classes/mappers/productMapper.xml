@@ -43,17 +43,16 @@
 	<insert id="insProduct">
 		insert into product(category1, category2, pname, subtitle, price, author, content, 
 		company, stock, img1, img2, img3, img4, pstar)
-		values(category1=#{category1}, category2=#{category2},
-		pname=#{pname}, subtitle=#{subtitle}, price=#{price}, author=#{author},
-		content=#{content}, default, img1=#{img1}, img2=#{img2}, img3=#{img3},
-		img4=#{img4}, default)
+		values(#{category1}, #{category2}, #{pname}, #{subtitle}, #{price}, #{author},
+		#{content}, #{company}, default, #{img1}, #{img2}, #{img3}, #{img4}, default)
 	</insert>
 	
 	<!-- 상품 변경 -->
 	<update id="upProduct">
 		update product set category1=#{category1}, category2=#{category2}, pname=#{pname},
-		author=#{author}, content=#{content}, company=#{company},
-		img1=#{img1}, img2=#{img2}, img3=#{img3}, img4=#{img4} where pid=#{pid}
+		price=#{price}, subtitle=#{subtitle}, author=#{author}, content=#{content},
+		company=#{company}, img1=#{img1}, img2=#{img2}, img3=#{img3}, img4=#{img4} 
+		where pid=#{pid}
 	</update>
 	
 	<!-- 별점 업데이트 -->
