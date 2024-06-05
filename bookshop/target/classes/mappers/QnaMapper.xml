@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+
+	<!-- has a 관계 설정 -->
+	<resultMap type="com.bookshop.domain.Qna" id="qnaRM">
+        <id property="qno" column="qno"/>
+        <result property="lev" column="lev"/>
+        <result property="parno" column="parno"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="img" column="img"/>
+        <result property="member_id" column="member_id"/>
+        <result property="visited" column="visited"/>
+        <result property="resdate" column="resdate"/>
+    </resultMap>
+	
+    <!-- 묻고 답하기 목록 조회 -->
+    <select id="getQnaList" resultMap="qnaRM">
+        select * from qna_view
+        order by resdate desc
+    </select>
+    
+    <!-- 묻고 답하기 단일 조회 -->
+    <select id="getQna" resultMap="qnaRM">
+        select * from qna_view
+        where qno = #{qno}
+    </select>
+    
+    <!-- 등록 -->
+    <insert id="insQna" parameterType="com.bookshop.domain.Qna">
+    	insert into qna (lev, parno, title, content, img, member_id, visited, resdate)
+        values (#{lev}, #{parno}, #{title}, #{content} ,#{img}, #{member_id}, #{visited}, CURRENT_TIMESTAMP)
+    </insert>
+    
+    <!-- 변경 -->
+	<update id="upQna" parameterType="com.bookshop.domain.Qna">
+		update qna set title=#{title}, content=#{content}, img=#{img} where qno=#{qno}
+	</update>
+	
+	<!-- 조회수 증가 -->    
+	<update id="vcntQna">
+		update qna set visited=visited+1 where qno=#{qno}
+	</update>	
+    
+    <!-- 질문 글 삭제 -->
+	<delete id="delQna">
+		delete from qna where qno=#{qno}
+	</delete>
+	
+ 	<!-- 답변 글 삭제 -->
+    <delete id="delAnswer" parameterType="int">
+        delete from qna where parno = #{qno}
+    </delete>
+
+    <!-- 부모 Q&A의 plevel 조회 -->
+    <select id="getLev" parameterType="int" resultType="int">
+        SELECT lev FROM qna WHERE qno = #{qno}
+    </select>
+
+    <!-- 특정 부모 Q&A에 대한 답변 목록 조회 -->
+    <select id="getAnswer" parameterType="int" resultType="com.bookshop.domain.Qna">
+        select qno, lev, parno, title, content, img, member_id, visited, resdate
+        from qna 
+        where parno = #{parno} 
+        order by qno asc
+    </select>
+	    
+	</mapper>
