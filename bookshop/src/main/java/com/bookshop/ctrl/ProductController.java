@@ -41,7 +41,8 @@ public class ProductController {
 		List<Product> productList = productService.getProductList(sortMethod);
 		int allProductCount = productService.allProductCount();
 		model.addAttribute("productList",productList);
-		model.addAttribute("allProductCount", allProductCount);
+		model.addAttribute("productCount", allProductCount);
+		model.addAttribute("title", "종합");
 		return "product/productList";
 	}
 	
@@ -49,17 +50,57 @@ public class ProductController {
 	public String bigCategoryList(@RequestParam(defaultValue = "pdate") String sortMethod, @RequestParam("category1") String category1, Model model) {
 		List<Product> bigCategoryList = productService.getBigCategoryList(sortMethod, category1);
 		int bigCount = productService.bigCount(category1);
-		model.addAttribute("bigCategoryList", bigCategoryList);
-		model.addAttribute("bigCount", bigCount);
+		model.addAttribute("productList", bigCategoryList);
+		model.addAttribute("productCount", bigCount);
+		
+		String title = "";
+		
+		if(category1.equals("Literature")) {
+			title = "문학";
+		} else if(category1.equals("TripleSubject")) {
+			title = "인문·사회·과학";
+		} else if(category1.equals("Art")) {
+			title = "예술";
+		}
+		
+		model.addAttribute("title", title);
+		
 		return "product/productList";
 	}
 	
 	@GetMapping("smallCategoryList.do")
 	public String smallCategoryList(@RequestParam(defaultValue = "pdate") String sortMethod, @RequestParam("category2") String category2, Model model) {
-		List<Product> smallCategoryList = productService.getBigCategoryList(sortMethod, category2);
+		List<Product> smallCategoryList = productService.getSmallCategoryList(sortMethod, category2);
 		int smallCount = productService.smallCount(category2);
-		model.addAttribute("smallCategoryList", smallCategoryList);
-		model.addAttribute("smallCount", smallCount);
+		model.addAttribute("productList", smallCategoryList);
+		model.addAttribute("productCount", smallCount);
+		
+		String title = "";
+		
+		if(category2.equals("Novels")) {
+			title = "소설";
+		} else if(category2.equals("Poetry")) {
+			title = "시";
+		} else if(category2.equals("ChildrenStories")) {
+			title = "동화";
+		} else if(category2.equals("Essays")) {
+			title = "시";
+		} else if(category2.equals("Humanities")) {
+			title = "인문";
+		} else if(category2.equals("SocialSciences")) {
+			title = "사회";
+		} else if(category2.equals("Science")) {
+			title = "과학";
+		} else if(category2.equals("Illustrations")) {
+			title = "일러스트";
+		} else if(category2.equals("PhotoAlbums")) {
+			title = "사진집";
+		} else if(category2.equals("Comics")) {
+			title = "만화";
+		}
+		
+		model.addAttribute("title", title);
+		
 		return "product/productList";
 	}
 	
