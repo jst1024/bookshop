@@ -215,7 +215,7 @@ public class ProductController {
 			HttpServletRequest request, HttpServletResponse response, Model model) {
 		
 		Product before = productService.getProduct(pid);
-		
+					
 		String uploadDir = request.getServletContext().getRealPath(uploadLoc);
 		File dir = new File(uploadDir);
 		
@@ -252,25 +252,26 @@ public class ProductController {
 			} else {
 				img4Name = before.getImg4();
 			}
-			
-			Product product = new Product();
-			product.setPid(pid);
-			product.setCategory1(category1);
-			product.setCategory2(category2);
-			product.setPname(pname);
-			product.setSubtitle(subtitle);
-			product.setPrice(price);
-			product.setAuthor(author);
-			product.setContent(content);
-			product.setCompany(company);
-			product.setImg1(img1Name);
-			product.setImg2(img2Name);
-			product.setImg3(img3Name);
-			product.setImg4(img4Name);
 		} catch(IOException e) {
 			log.error("예외 : {}", e);
 		}
 		
+		Product product = new Product();
+		product.setPid(pid);
+		product.setCategory1(category1);
+		product.setCategory2(category2);
+		product.setPname(pname);
+		product.setSubtitle(subtitle);
+		product.setPrice(price);
+		product.setAuthor(author);
+		product.setContent(content);
+		product.setCompany(company);
+		product.setImg1(img1Name);
+		product.setImg2(img2Name);
+		product.setImg3(img3Name);
+		product.setImg4(img4Name);
+		
+		productService.upProduct(product);
 		return "redirect:productList.do";
 	}
 	

@@ -28,4 +28,5 @@ public class Product {
 	private String img4; //상세보기2
 	private float pstar; //상품 리뷰 별점 평균
 	private int rcnt; //리뷰 작성 수
+	private String pdate; //상품 등록일
 }
